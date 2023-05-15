@@ -31,7 +31,7 @@ def showSummary():
         return render_template('welcome.html',club=club,competitions=competitions)
     
     except IndexError:
-        error = "Mail wasn't found"
+        error = "Mail was not found"
         return render_template('index.html', error=error)
 
 

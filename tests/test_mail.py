@@ -9,7 +9,7 @@ def test_mail_exists(client):
 
 
 def test_mail_doesnt_exists(client):
-    error = "Mail wasn't found"
+    error = "Mail was not found"
     mail = "a@irontemple.com"
     response = client.post('/showSummary', data={'email' : mail})
     assert response.status_code == 200
