@@ -53,7 +53,7 @@ def purchasePlaces():
         return render_template('welcome.html', club=club, competitions=competitions)
 
     else:
-        error = "You don't have enough points to do that."
+        error = "You do not have enough points to do that."
         return render_template('booking.html', club=club, competition=competition, error=error)
 
 

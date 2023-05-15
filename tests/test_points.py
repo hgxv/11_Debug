@@ -20,6 +20,8 @@ def test_club_has_enough_points(client):
             'competition' : competition["name"],
         }
     )
+
+    # Make sure that points and places are deducted
     assert response.status_code == 200
     assert "booking complete!" in response.data.decode()
     assert club["points"] == 0
@@ -36,14 +38,17 @@ def test_club_doesnt_have_enough_points(client):
     # Buy 5 places, which is too much
     places_to_buy = 5
 
+    error = "You do not have enough points to do that."
+
     response = client.post(
         '/purchasePlaces',
         data={
             'places' : places_to_buy,
             'club' : club["name"],
             'competition' : competition["name"],
-        }
+        },
+        follow_redirects=True
     )
 
     assert response.status_code == 200
-    assert "You don't have enough points" in response.data.decode()
+    assert error in response.data.decode()
