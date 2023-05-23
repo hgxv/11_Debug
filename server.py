@@ -1,4 +1,5 @@
 import json
+from datetime import datetime
 from flask import Flask,render_template,request,redirect,flash,url_for
 
 
@@ -20,6 +21,15 @@ app.secret_key = 'something_special'
 competitions = loadCompetitions()
 clubs = loadClubs()
 
+@app.template_filter('date_check')
+def date_check(date_to_check):
+    competition_date = datetime.strptime(date_to_check, "%Y-%m-%d %H:%M:%S")
+    date = datetime.now()
+    if competition_date > date:
+        return True
+    return False
+
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -39,11 +49,18 @@ def showSummary():
 def book(competition,club):
     foundClub = [c for c in clubs if c['name'] == club][0]
     foundCompetition = [c for c in competitions if c['name'] == competition][0]
-    if foundClub and foundCompetition:
+    competition_date = datetime.strptime(foundCompetition["date"], "%Y-%m-%d %H:%M:%S")
+    date = datetime.now()
+    if foundClub and foundCompetition and competition_date > date:
         return render_template('booking.html',club=foundClub,competition=foundCompetition)
+    
+    elif competition_date < date:
+        flash("You cannot book in a past competition !")
+        return render_template('welcome.html', club=foundClub, competitions=competitions)
+
     else:
         flash("Something went wrong-please try again")
-        return render_template('welcome.html', club=club, competitions=competitions)
+        return render_template('welcome.html', club=foundClub, competitions=competitions)
 
 
 @app.route('/purchasePlaces', methods=['POST'])
