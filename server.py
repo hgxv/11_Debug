@@ -21,14 +21,6 @@ app.secret_key = 'something_special'
 competitions = loadCompetitions()
 clubs = loadClubs()
 
-@app.template_filter('date_check')
-def date_check(date_to_check):
-    competition_date = datetime.strptime(date_to_check, "%Y-%m-%d %H:%M:%S")
-    date = datetime.now()
-    if competition_date > date:
-        return True
-    return False
-
 
 @app.route('/')
 def index():
