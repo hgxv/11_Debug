@@ -46,12 +46,8 @@ def book(competition,club):
     if foundClub and foundCompetition and competition_date > date:
         return render_template('booking.html',club=foundClub,competition=foundCompetition)
     
-    elif competition_date < date:
-        flash("You cannot book in a past competition !")
-        return render_template('welcome.html', club=foundClub, competitions=competitions)
-
     else:
-        flash("Something went wrong-please try again")
+        flash("You cannot book in a past competition !")
         return render_template('welcome.html', club=foundClub, competitions=competitions)
 
 
