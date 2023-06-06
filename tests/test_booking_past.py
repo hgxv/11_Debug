@@ -8,6 +8,9 @@ def test_booking_valid_date(client):
 
     # Competition is Winter Showdown with 17 places
     # It takes place on following date : 9999-01-01 13:30:00
+    #
+    # We create this competition so that the date will always
+    # be set ahead of today.
     competitions.append(
         {
         "name": "Winter Showdown",
@@ -26,6 +29,8 @@ def test_booking_past_date(client):
 
     # Competition is Spring Festival with 25 places
     # It takes place on following date : 2020-03-27 10:00:00
+    #
+    # Checking this because it's set in the past.
 
     response = client.get("/book/Spring Festival/Iron Temple")
     

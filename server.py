@@ -41,8 +41,11 @@ def showSummary():
 def book(competition,club):
     foundClub = [c for c in clubs if c['name'] == club][0]
     foundCompetition = [c for c in competitions if c['name'] == competition][0]
+
+    # Parse the competition's date into a datetime object and compare to today's date.
     competition_date = datetime.strptime(foundCompetition["date"], "%Y-%m-%d %H:%M:%S")
     date = datetime.now()
+
     if foundClub and foundCompetition and competition_date > date:
         return render_template('booking.html',club=foundClub,competition=foundCompetition)
     
@@ -57,10 +60,12 @@ def purchasePlaces():
     club = [c for c in clubs if c['name'] == request.form['club']][0]
     placesRequired = int(request.form['places'])
 
+    # Can't book more than 12 places
     if placesRequired > 12:
         error = "You cannot book more than 12 places."
         return render_template('booking.html', club=club, competition=competition, error=error)
     
+    # Can't book 0 or negatic number of places.
     elif placesRequired < 1:
         error = "Please enter a number between 1 and 12 to book places."
         return render_template('booking.html', club=club, competition=competition, error=error)
