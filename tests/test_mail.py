@@ -1,10 +1,9 @@
 import pytest
 from tests.conftest import client
+from server import clubs
 
 def test_mail_exists(client):
-
-    # Checking an existing email from the json file.
-    mail = "admin@irontemple.com"
+    mail = clubs[1]["email"]
     response = client.post('/showSummary', data={'email' : mail})
 
     assert response.status_code == 200
