@@ -1,8 +1,9 @@
 import pytest
 from tests.conftest import client
+from server import clubs
 
 def test_mail_exists(client):
-    mail = "admin@irontemple.com"
+    mail = clubs[1]["email"]
     response = client.post('/showSummary', data={'email' : mail})
     assert response.status_code == 200
     assert mail in response.data.decode()

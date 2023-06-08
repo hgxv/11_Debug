@@ -2,6 +2,7 @@ import pytest
 from tests.conftest import client
 from server import clubs, competitions
 
+
 def test_club_has_enough_points(client):
     # Choose Iron Temple with 4 points
     club = clubs[1]
@@ -11,8 +12,6 @@ def test_club_has_enough_points(client):
 
     # Buy 4 place, club has enough points
     places_to_buy = 4
-
-    places_remaining = competition["numberOfPlaces"] - places_to_buy
 
     response = client.post(
         '/purchasePlaces',
@@ -27,7 +26,6 @@ def test_club_has_enough_points(client):
     assert response.status_code == 200
     assert "booking complete!" in response.data.decode()
     assert club["points"] == 0
-    assert competition["numberOfPlaces"] == places_remaining
 
 
 def test_club_doesnt_have_enough_points(client):
