@@ -70,6 +70,10 @@ def purchasePlaces():
         error = "Please enter a number between 1 and 12 to book places."
         return render_template('booking.html', club=club, competition=competition, error=error)
 
+    elif placesRequired > int(competition["numberOfPlaces"]):
+        error = "There is not enough places available for this competition"
+        return render_template('booking.html', club=club, competition=competition, error=error)
+
     else:
         if placesRequired <= int(club['points']):
             club['points'] = int(club['points']) - placesRequired

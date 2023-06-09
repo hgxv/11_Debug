@@ -17,7 +17,12 @@ server.competitions = [
     "name": "Winter Showdown",
     "date": "9999-01-01 13:30:00",
     "numberOfPlaces": "17"
-    } 
+    },
+    {
+    "name": "Little Event",
+    "date": "9999-01-01 13:30:00",
+    "numberOfPlaces": "2"
+    }    
 ]
 
 server.clubs = [
