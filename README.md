@@ -44,8 +44,15 @@
 
 5. Testing
 
-    You are free to use whatever testing framework you like-the main thing is that you can show what tests you are using.
-
-    We also like to show how well we're testing, so there's a module called 
-    [coverage](https://coverage.readthedocs.io/en/coverage-5.1/) you should add to your project.
+    We are using pytest for testing this project, and coverage to generate reports.
+    To run current tests use this command :
+    
+    <code>pytest tests/</code>
+    
+    To generate a report :
+    
+    <code>coverage run -m pytest tests/</code>
+    
+    Once the report is generated you can generate an html report with the following command :
+    - <code>coverage html</code>
 
