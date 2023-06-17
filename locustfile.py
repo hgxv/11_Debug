@@ -9,9 +9,9 @@ class HelloWorldUser(HttpUser):
         self.client.get("/")
         time.sleep(1)
         self.client.get("/pointsBoard")
-        time.sleep(3)
+        time.sleep(1)
         self.client.get(f"/book/{competition}/{club}")
-        time.sleep(3)
+        time.sleep(1)
         self.client.post("/purchasePlaces", data={
             'places' : "100",
             'club' : club,
